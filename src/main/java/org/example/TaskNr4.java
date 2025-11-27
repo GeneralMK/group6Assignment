@@ -19,4 +19,6 @@ public class TaskNr4 {
         System.out.println("Product: " +(c*d));
         System.out.println("Division: " + ((double)c/d));
     }
+
 }
+
