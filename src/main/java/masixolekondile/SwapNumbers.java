@@ -23,6 +23,6 @@ public class SwapNumbers {
         a = swapped[0];
         b = swapped[1];
 
-        System.out.println("After swap:  a = " + a + ", b = " + b);
+        System.out.println("After swap: a = " + a + ", b = " + b);
     }
 }

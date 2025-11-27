@@ -1,20 +1,41 @@
 package group6Tests;
 
 import masixolekondile.SwapNumbers;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SwapNumbersTest {
 
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+
+    @BeforeEach
+    void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @AfterEach
+    void restoreStreams() {
+        System.setOut(originalOut);
+    }
+
     @Test
-    public void testSwap() {
-        int a = 5;
-        int b = 9;
+    void testMainOutput() {
+        SwapNumbers.main(new String[]{});
 
-        int[] swapped = SwapNumbers.swap(a, b);
+        String expectedOutput =
+                "Before swap: a = 10, b = 20" + System.lineSeparator() +
+                        "After swap: a = 20, b = 10" + System.lineSeparator();
 
-        // After swapping, first should be 9, second should be 5
-        assertEquals(9, swapped[0]);
-        assertEquals(5, swapped[1]);
+        String failureMessage =
+                "The output does not match the expected before/after swap values.\n" +
+                        "Please ensure that your program correctly swaps the two integers.";
+
+        assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }
 }
